@@ -1,0 +1,17 @@
+{% if pages != 1 %}
+<div id="page_buttons" class="flex gap-4">
+{% if page != 1 %}
+<button class="border-2 border-gray-200 text-sky-400 hover:cursor-pointer w-min h-10 items-center flex px-6" onclick="set_params('page', {{ page-1 }})">
+	prev_page
+</button>
+{% endif %}
+{% if pages > 1 and page != pages %}
+<button class="border-2 border-gray-200 text-sky-400 hover:cursor-pointer w-min h-10 items-center flex px-6" onclick="set_params('page', {{ page+1 }})">
+	next_page
+</button>
+{% endif %}
+</div>
+{% endif %}
+
+
+

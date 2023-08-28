@@ -1,0 +1,28 @@
+<script>
+const map = new Map();
+function get_comments(post_id) {
+  var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+			let cont = document.getElementById("comment-block-"+post_id);
+			cont.innerHTML = xhttp.responseText;
+			cont.innerHTML = cont.getElementsByTagName('section')[0].children[0].innerHTML;
+				}};
+    xhttp.open('GET', "/post/"+post_id+"/comments"+"?page="+map.get(post_id), true);
+    xhttp.send();
+};
+function hide_comments(post_id) {
+	document.getElementById('comment-wrapper-'+post_id).classList.toggle('hidden');
+};
+function button_page(post_id, delta) {
+	let page = map.get(post_id);
+	if ( page ) {
+		page = page + delta;
+	} else {
+		page = 2;
+	};
+	map.set(post_id, page);
+	get_comments(post_id, page);
+};
+</script>
+

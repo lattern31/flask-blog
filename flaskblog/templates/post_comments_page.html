@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block content %}
+{% for comment in comments %}
+  {% include "comment.html" %}
+{% endfor %}
+{% include "pagination_buttons.html" %}
+{% endblock content %}

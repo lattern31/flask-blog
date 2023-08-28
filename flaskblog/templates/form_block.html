@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="w-1/2 border-2 border-gray-200 shadow">
+		<div class="p-4">
+			<div class="border-b-2 border-gray-200 mb-6">
+				<span class="text-xl font-bold">{{ title }}</span>
+			</div>
+			<form method="POST" action="">
+				{% include "std_form.html" %}
+			</form>
+		</div>
+	</div>
+{% endblock content %}
+

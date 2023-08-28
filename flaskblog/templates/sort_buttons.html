@@ -1,0 +1,42 @@
+<div id="sort_buttons" class="flex gap-4">
+<button class="border-2 w-min h-10 items-center flex px-6
+{% if params['order'] == 'desc' %}
+border-gray-300 bg-gray-200 text-sky-500 
+{% else %}
+border-gray-200 text-sky-400" onclick="set_params('order', 'desc') 
+{% endif %}
+">⬇️</button>
+<button class="border-2 w-min h-10 items-center flex px-6
+{% if params['order'] == 'asc' %}
+border-gray-300 bg-gray-200 text-sky-500 
+{% else %}
+border-gray-200 text-sky-400" onclick="set_params('order', 'asc') 
+{% endif %}
+">⬆️</button>
+<span class="self-center">Sort by</span>
+<button class="border-2 w-min h-10 items-center flex px-6
+{% if params['sort'] == 'date' %}
+border-gray-300 bg-gray-200 text-sky-500 
+{% else %}
+border-gray-200 text-sky-400" onclick="set_params('sort', 'date') 
+{% endif %}
+">date</button>
+
+<button class="border-2 w-min h-10 items-center flex px-6
+{% if params['sort'] == 'likes' %}
+border-gray-300 bg-gray-200 text-sky-500 
+{% else %}
+border-gray-200 text-sky-400" onclick="set_params('sort', 'likes') 
+{% endif %}
+">likes</button>
+
+<button class="border-2 w-min h-10 items-center flex px-6
+{% if params['sort'] == 'comments' %}
+border-gray-300 bg-gray-200 text-sky-500 
+{% else %}
+border-gray-200 text-sky-400" onclick="set_params('sort', 'comments') 
+{% endif %}
+">comments</button>
+
+</div>
+

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>{{ title }}</title>
+</head>
+<body>
+	{% include "includes/header.html" %}
+	<section class="w-full">
+		<div class="container mx-auto py-12 flex flex-col gap-8">
+			
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% for category, message in messages %}
+					<div class="w-1/2 border-2 border-gray-300">
+						<div class="p-4">
+							<span class="text-m py-2">
+								{{ message }}
+							</span>
+						</div>
+					</div>
+				{% endfor %}
+			{% endwith %}
+
+			{% block content %}{% endblock %}
+		</div>
+	</section>
+</body>
+</html>

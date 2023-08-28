@@ -1,0 +1,24 @@
+<div class="[&>*]:mb-4 focus-visible:[&>*>input]:border-gray-400 focus-visible:[&>*>input]:outline-none">
+	{{ form.hidden_tag() }}
+	{% for field in form._fields.values() %}
+		{% if field.type == "SubmitField" %}
+			<button class="border-2 border-gray-200 text-sky-400 mt-10 hover:cursor-pointer w-min h-10 items-center flex px-6">
+				{{ field(class="text-l hover:cursor-pointer") }} 
+			</button>
+		{% elif field.type == "CSRFTokenField" %}
+			{{ field }}
+		{% else %}
+			<div>
+					{{ field.label(class="text-l pb-1") }} 
+					{% if field.errors %}
+						{% for error in field.errors %}
+							{{ field(style="min-height:40px;", class="w-full h-10 border-2 border-red-400") }} 
+							<span class="block pt-1 text-m text-red-400">{{ error }}</span>
+						{% endfor %}
+					{% else %}
+						{{ field(style="min-height:40px;", class="w-full h-10 border-2 border-gray-200") }} 
+					{% endif %}
+			</div>
+		{% endif %}
+	{% endfor %}
+</div>
