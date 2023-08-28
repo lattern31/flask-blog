@@ -35,8 +35,7 @@ class User(db.Model, UserMixin):
 	posts = db.relationship('Post', backref="author", lazy=True)
 	comments = db.relationship('Comment', backref="author", lazy=True)
 	avatar = db.Column(db.String(20), nullable=False, default='default.jpg')
-	prfl_dscrpt = "Hi, I'm " + username
-	description = db.Column(db.String(500), nullable=False, default=prfl_dscrpt)
+	description = db.Column(db.String(500), nullable=False, default="Hi, I'm new here!")
 	
 	def __repr__(self) -> str:
 		return f"User('{self.id}', '{self.username}', '{self.email}')"
