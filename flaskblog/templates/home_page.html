@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+{% include "includes/comment_pgtn_logic.html" %}
+{% include "includes/parameters_logic.html" %}
+{% include "includes/sort_buttons.html" %}
+{% for post in posts %}
+	{% include "includes/post.html" %}
+{% endfor %}
+{% include "includes/post_pgtn.html" %}
+{% endblock content %}

@@ -21,8 +21,7 @@ def new_post():
         db.session.commit()
         flash("Post Created", "success")
         return redirect(url_for('main.home'))
-    return render_template("form_block.html", title="Create Post", form=form)
-
+    return render_template("form_full_page.html", title="Create Post", form=form)
 
 @posts.route("/post/<int:post_id>", methods=["GET", "POST"])
 def post_page(post_id):
@@ -37,5 +36,5 @@ def post_comments_page(post_id):
     page = int(parse_params(request.args)['page'])
     post = Post.query.get(post_id)
     comments = Comment.query.filter_by(post_id=post.id).paginate(page=page, per_page=5)
-    return render_template('post_comments_page.html', comments=comments, page=page, pages=comments.pages, post_id=post_id)
+    return render_template('comments_page.html', comments=comments, page=page, pages=comments.pages, post_id=post_id)
 

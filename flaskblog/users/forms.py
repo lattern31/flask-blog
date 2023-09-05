@@ -1,9 +1,11 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import (StringField, PasswordField, SubmitField, 
+                     BooleanField, TextAreaField, ValidationError)
 from wtforms.validators import DataRequired, Length, Email 
 from flaskblog.models import User
 from flask_login import current_user
+
 
 class RegistrationForm(FlaskForm):
 	username = StringField(
@@ -26,6 +28,8 @@ class RegistrationForm(FlaskForm):
 	submit = SubmitField('Sign Up')
 
 	def validate_username(self, username):
+		if username.data[0].isdigit():
+			raise ValidationError('username can\'t start with a digit')
 		user = User.query.filter_by(
 			username=username.data
 		).first()
@@ -38,6 +42,11 @@ class RegistrationForm(FlaskForm):
 		).first()
 		if user:
 			raise ValidationError('email taken dumbass!!')
+	
+	def validate_password(self, password):
+		if len(password.data) < 4:
+			raise ValidationError('password can\'t be shorter than 4 characters')
+
 
 class LoginForm(FlaskForm):
 	email = StringField(
@@ -50,8 +59,8 @@ class LoginForm(FlaskForm):
 		'Password',
 		validators=[DataRequired()]
 	)
-	remember = BooleanField('Remember Me')
 	submit = SubmitField('Login')
+
 
 class UpdateUser(FlaskForm):
 	username = StringField(
@@ -93,3 +102,4 @@ class UpdateUser(FlaskForm):
 			).first()
 			if user:
 				raise ValidationError('email taken dumbass!!')
+

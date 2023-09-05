@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
-	{% include "pagination_logic.html" %}
+	{% include "includes/comment_pgtn_logic.html" %}
 	<div class="w-1/2 flex border-2 border-gray-300 mb-6 p-4">
 		<img class="h-32 w-32 object-cover rounded-2xl" src="{{ image_file }}">
 		<div class="px-6 w-full">
 			<div class="flex">
 				<h2 class="flex-1 text-2xl pb-4">{{ user.username }}</h2>
 				{% if is_loged %}
-				<small><a href="{{ url_for('users.edit_profile') }}">Редактировать</a></small>
+				<small><a href="{{ url_for('users.edit_profile') }}">Edit</a></small>
 				{% endif %}
 			</div>
 			<p>{{ user.description }}</p>
 		</div>
 	</div>
 	{% for post in posts %}
-		{% include "post.html" %}
+		{% include "includes/post.html" %}
 	{% endfor %}
 {% endblock content %}
 

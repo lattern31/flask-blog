@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 {% for comment in comments %}
-  {% include "comment.html" %}
+  {% include "includes/comment.html" %}
 {% endfor %}
-{% include "pagination_buttons.html" %}
+{% include "includes/comment_pgtn_btns.html" %}
 {% endblock content %}

@@ -8,7 +8,6 @@ from sqlalchemy import desc
 def load_user(user_id):
 	return User.query.get(int(user_id))
 
-
 post_likes = db.Table(
 					'post_likes',
 					db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
@@ -19,8 +18,8 @@ class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(100), unique=True, nullable=False)
 	email = db.Column(db.String(100), unique=True, nullable=False)
-
 	password_hash = db.Column(db.String(128), nullable=False)
+
 	@property
 	def password(self):
 		raise AttributeError('password not readable')
@@ -39,6 +38,7 @@ class User(db.Model, UserMixin):
 	
 	def __repr__(self) -> str:
 		return f"User('{self.id}', '{self.username}', '{self.email}')"
+
 
 class Post(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -62,3 +62,4 @@ class Comment(db.Model):
     
     def __repr__(self):
         return f"Comment({self.id}, post_id: {self.post_id}, user_id: {self.user_id}, '{self.content}')"
+

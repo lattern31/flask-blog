@@ -1,11 +1,13 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
+from flaskblog import login_manager
 from flaskblog import db, bcrypt
 from flaskblog.models import User, Post
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateUser)
 from flaskblog.users.utils import save_picture
 from flaskblog.posts.utils import post_logic
 from flask.wrappers import Response
+
 
 users = Blueprint('users', __name__)
 
@@ -24,7 +26,7 @@ def register():
         db.session.commit()
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('users.login'))
-    return render_template('form_block.html', title="Register", form=form)
+    return render_template('form_full_page.html', title="Register", form=form)
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
@@ -38,14 +40,13 @@ def login():
             return redirect(url_for('main.home'))
         else:
             flash('unsuccessful login', 'danger')
-    return render_template('form_block.html', title="Auth", form=form)
+    return render_template('form_full_page.html', title="Auth", form=form)
 
 @users.route("/logout", methods=["GET", "POST"])
 def logout():
     logout_user()
     return redirect(url_for('main.home'))
         
-
 @users.route("/edit_profile", methods=["GET", "POST"])
 @login_required
 def edit_profile():
@@ -66,7 +67,7 @@ def edit_profile():
         form.description.data = current_user.description  
     posts = Post.query.filter_by(user_id=current_user.id)
     image_file = url_for('static', filename='profile_pics/' + current_user.avatar)
-    return render_template("edit_profile.html", title="Edit profile", posts=posts, image_file=image_file, form=form)
+    return render_template("user_edit_page.html", title="Edit profile", posts=posts, image_file=image_file, form=form)
 
 @users.route("/user/<username>", methods=["GET", "POST"])
 def user_page(username):

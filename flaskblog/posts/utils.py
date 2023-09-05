@@ -84,5 +84,5 @@ def render_home_pg() -> Response:
         if isinstance(post_or_redir, Response):
             return post_or_redir
         post_lst.append(post_or_redir)
-    return render_template("home.html", title="home page", posts=post_lst, page=cur_page, pages=posts.pages, params=params)
+    return render_template("home_page.html", title="home page", posts=post_lst, page=cur_page, pages=posts.pages, params=params)
 
